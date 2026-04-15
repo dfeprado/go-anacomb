@@ -4,51 +4,29 @@ package anacomb
 import "testing"
 
 func TestFactorial(t *testing.T) {
-	n := 4
-	facN, _ := Factorial(n)
-	if facN != 24 {
-		t.Errorf("Expected 24, got %v", facN)
-	}
+	facN, _ := Factorial(4)
+	AssertEquals(24, facN, t)
 
-	n = 5
-	facN, _ = Factorial(n)
-	if facN != 120 {
-		t.Errorf("Expected 120, got %v", facN)
-	}
+	facN, _ = Factorial(5)
+	AssertEquals(120, facN, t)
 }
 
 func TestFactorialOfZero(t *testing.T) {
-	n := 0
-	facN, _ := Factorial(n)
-	if facN != 1 {
-		t.Errorf("Expected 1, got %v", facN)
-	}
+	facN, _ := Factorial(0)
+	AssertEquals(1, facN, t)
 }
 
 func TestFactorialOfOneAndTwo(t *testing.T) {
-	n := 1
-	facN, _ := Factorial(n)
-	if facN != 1 {
-		t.Errorf("Expected 1, got %v", facN)
-	}
+	facN, _ := Factorial(1)
+	AssertEquals(1, facN, t)
 
-	n = 2
-	facN, _ = Factorial(n)
-	if facN != n {
-		t.Errorf("Expected 2, got %v", facN)
-	}
+	facN, _ = Factorial(2)
+	AssertEquals(2, facN, t)
 }
 
 func TestFactorialError(t *testing.T) {
 	fac, err := Factorial(-1)
-	if fac != 0 {
-		t.Errorf("fac should be 0, but it was %v", fac)
-	}
-	if err == nil {
-		t.Errorf("Error is nil")
-	}
-
-	if err.Error() != "x must be >= 0" {
-		t.Errorf("Unexpected error \"%v\"", err)
-	}
+	AssertEquals(0, fac, t)
+	AssertNotNil(err, t)
+	AssertEquals("x must be >= 0", err.Error(), t)
 }
