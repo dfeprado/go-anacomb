@@ -8,7 +8,6 @@ func TestIndexesInitialization(t *testing.T) {
 	AssertEquals(1, i.iArrLastIdx, t)
 }
 
-
 func TestIndexesUpdating_2Indexes_SourceLen3(t *testing.T) {
 	i := initializeIndexes(3, 2)
 	AssertEqualSlice([]int{0, 1}, i.iArr, t)
@@ -66,8 +65,8 @@ func TestIndexesUpdating_4Indexes_SourceLen6(t *testing.T) {
 	AssertEqualSlice([]int{0, 1, 3, 5}, i.iArr, t)
 
 	// I'll check by math induction
-	i.update() // 6th combination
-	i.update() // 7th combination
+	i.update()           // 6th combination
+	i.update()           // 7th combination
 	updated = i.update() // 8th combination
 	AssertTrue(updated, t)
 	AssertEqualSlice([]int{0, 2, 3, 5}, i.iArr, t)

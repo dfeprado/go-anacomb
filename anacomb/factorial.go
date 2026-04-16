@@ -1,4 +1,3 @@
-
 package anacomb
 
 import "errors"

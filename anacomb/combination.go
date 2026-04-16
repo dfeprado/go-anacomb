@@ -1,10 +1,10 @@
 package anacomb
 
 type indexes struct {
-	iArr []int
+	iArr        []int
 	iArrLastIdx int
-	sourceLen int
-	eol bool
+	sourceLen   int
+	eol         bool
 }
 
 func (i *indexes) update() bool {
@@ -13,7 +13,7 @@ func (i *indexes) update() bool {
 	}
 
 	pivotIdx := i.iArrLastIdx
-	LL:
+LL:
 	i.iArr[pivotIdx] += 1
 	if i.iArr[pivotIdx] < i.sourceLen {
 		if pivotIdx == i.iArrLastIdx {
@@ -21,7 +21,7 @@ func (i *indexes) update() bool {
 		}
 
 		for idx := pivotIdx + 1; idx < len(i.iArr); idx++ {
-			i.iArr[idx] = i.iArr[idx - 1] + 1
+			i.iArr[idx] = i.iArr[idx-1] + 1
 		}
 
 		if pivotIdx > 0 && i.iArr[i.iArrLastIdx] >= i.sourceLen {
@@ -42,9 +42,9 @@ func (i *indexes) update() bool {
 
 func initializeIndexes(sourceLen int, parts int) *indexes {
 	i := &indexes{
-		iArr: make([]int, parts),
+		iArr:        make([]int, parts),
 		iArrLastIdx: parts - 1,
-		sourceLen: sourceLen,
+		sourceLen:   sourceLen,
 	}
 
 	for idx := range parts {
@@ -69,7 +69,7 @@ func Combine(A []int, parts int) ([][]int, error) {
 		}
 		result = append(result, combination)
 	}
-	
+
 	return result, nil
 }
 
