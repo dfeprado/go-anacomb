@@ -84,7 +84,6 @@ func TestIndexesUpdating_4Indexes_SourceLen6(t *testing.T) {
 }
 
 func TestCombination(t *testing.T) {
-	t.Skip()
 	count, _ := CountCombination(4, 2)
 	AssertEquals(6, count, t)
 
@@ -93,7 +92,6 @@ func TestCombination(t *testing.T) {
 }
 
 func TestCombine_ArrayOf3_TakenBy2(t *testing.T) {
-	t.Skip()
 	input := []int{1, 2, 3}
 	expected := [][]int{
 		{1, 2},
@@ -109,7 +107,6 @@ func TestCombine_ArrayOf3_TakenBy2(t *testing.T) {
 }
 
 func TestCombine_ArrayOf4_TakenBy2(t *testing.T) {
-	t.Skip()
 	input := []int{1, 2, 3, 4}
 	expected := [][]int{
 		{1, 2},
@@ -128,7 +125,6 @@ func TestCombine_ArrayOf4_TakenBy2(t *testing.T) {
 }
 
 func TestCombine_ArrayOf4_TakenBy3(t *testing.T) {
-	t.Skip()
 	input := []int{1, 2, 3, 4}
 	expected := [][]int{
 		{1, 2, 3},

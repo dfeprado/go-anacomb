@@ -1,52 +1,5 @@
 package anacomb
 
-import "fmt"
-
-func Combine(A []int, parts int) ([][]int, error) {
-	combinations, err := CountCombination(len(A), parts)
-	if err != nil {
-		return nil, err
-	}
-
-	ctrlIdxs := make([]int, parts)
-	ctrlLastIdx := parts - 1
-	result := make([][]int, 0, combinations)
-	for i := range parts {
-		ctrlIdxs[i] = i
-	}
-
-	cIdx := 0
-	combination := make([]int, parts)
-	for combinations > 0 {
-		if cIdx == parts {
-			result = append(result, combination)
-			combination = make([]int, parts)
-			cIdx = 0
-			combinations -= 1
-
-			tmp := ctrlIdxs[ctrlLastIdx]
-			tmp += 1
-			fmt.Println(tmp)
-			if tmp == len(A) {
-				ctrlIdxs[ctrlLastIdx - 1] += 1
-				if ctrlIdxs[ctrlLastIdx - 1] == ctrlIdxs[ctrlLastIdx] {
-					ctrlIdxs[0] = ctrlIdxs[0] + 1
-					for i := 1; i < len(ctrlIdxs); i++ {
-						ctrlIdxs[i] = ctrlIdxs[i - 1] + 1
-					}
-				}
-			} else {
-				ctrlIdxs[ctrlLastIdx] = tmp
-			}
-		}
-		fmt.Println(ctrlIdxs)
-		combination[cIdx] = A[ctrlIdxs[cIdx]]
-		cIdx += 1
-	}
-	
-	return result, nil
-}
-
 type indexes struct {
 	iArr []int
 	iArrLastIdx int
@@ -99,6 +52,25 @@ func initializeIndexes(sourceLen int, parts int) *indexes {
 	}
 
 	return i
+}
+
+func Combine(A []int, parts int) ([][]int, error) {
+	combinations, err := CountCombination(len(A), parts)
+	if err != nil {
+		return nil, err
+	}
+
+	combIndexes := initializeIndexes(len(A), parts)
+	result := make([][]int, 0, combinations)
+	for combAvail := true; combAvail; combAvail = combIndexes.update() {
+		combination := make([]int, parts)
+		for idx, idxPointer := range combIndexes.iArr {
+			combination[idx] = A[idxPointer]
+		}
+		result = append(result, combination)
+	}
+	
+	return result, nil
 }
 
 func CountCombination(n, parts int) (int, error) {
