@@ -1,15 +1,15 @@
 package anacomb
 
-func Combine(A []int, parts int) ([][]int, error) {
+func Combine[K any](A []K, parts int) ([][]K, error) {
 	combinations, err := CountCombination(len(A), parts)
 	if err != nil {
 		return nil, err
 	}
 
 	permut := initPermut(len(A), parts)
-	result := make([][]int, 0, combinations)
+	result := make([][]K, 0, combinations)
 	for combAvail := true; combAvail; combAvail = permut.update() {
-		combination := make([]int, parts)
+		combination := make([]K, parts)
 		for idx, idxPointer := range permut.iArr {
 			combination[idx] = A[idxPointer]
 		}
